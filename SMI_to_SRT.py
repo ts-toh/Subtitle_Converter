@@ -1,5 +1,5 @@
 #-*- coding: utf-8 -*-
-import os, re, msvcrt
+import os, re
 
 def numToTime(num):
     
@@ -25,22 +25,19 @@ def numToTime(num):
 
 def myDecode(string):
     try:
-        return string.decode('euc-kr')
+        return string.decode('cp949')
     except:
         try:
             return string.decode('utf-8')
         except:
             print("EUC-KR 또는 UTF-8 인코딩 방식의 파일만 변환이 가능합니다.")
-            print("종료하시려면 아무키나 눌러주세요.")
-            msvcrt.getch()
             exit(0)
-
 
 ls = os.listdir('./')
 
 for i in range(len(ls)):
     if re.search('.*smi',ls[i]) != None:
-        print(ls[i])
+        print(ls[i], end='')
         smi_file = open(ls[i], 'br')
         srt_file = open(ls[i][:-3] + 'srt', 'bw')
         
@@ -73,7 +70,6 @@ for i in range(len(ls)):
 
         smi_file.close()
         srt_file.close()
-        print('ok')
+        print(' ---> '+ls[i][:-3]+'srt')
         
-print("종료하시려면 아무키나 눌러주세요.")
-msvcrt.getch()
+print("Complete!")
