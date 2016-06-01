@@ -58,16 +58,18 @@ for i in range(len(ls)):
                 if tmp != '':
                     vtt_file.write((numToTime(startNum)+' --> '+numToTime(endNum)+'\n').encode())
                     tmp = tmp.replace('\n','').replace('<br>','\n')
-                    tmp = re.sub(r'\n\n| \n', '\n', tmp)
+                    tmp = re.sub(r'.*<P', '<P', tmp)
+					tmp = re.sub(r'\n\n| \n', '\n', tmp)
                     tmp = re.sub(r'<b>|</b>|&nbsp;', '', tmp)
-                    vtt_file.write((tmp + '\n\n').encode())
+                    tmp = tmp[:-1]
+					vtt_file.write((tmp + '\n\n').encode())
                 line = p
             else:
                 line += 1
 
         smi_file.close()
         vtt_file.close()
-        print(' ---> '+ls[i][:-3]+'srt')
+        print(' ---> '+ls[i][:-3]+'vtt')
 
 print("Complete!")
 
