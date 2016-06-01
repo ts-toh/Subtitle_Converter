@@ -56,12 +56,15 @@ for i in range(len(ls)):
                 if p >= len(data): break;
                 endNum = re.search('[0-9]+',myDecode(data[p])).group(0)
                 if tmp != '':
-                    vtt_file.write((numToTime(startNum)+' --> '+numToTime(endNum)+'\n').encode())
                     tmp = tmp.replace('\n','').replace('<br>','\n')
                     tmp = re.sub(r'.*<P', '<P', tmp)
                     tmp = re.sub(r'\n\n| \n', '\n', tmp)
                     tmp = re.sub(r'<b>|</b>|&nbsp;', '', tmp)
                     tmp = tmp[:-1]
+                    if tmp == '<P CLASS=SUBTTL>':
+                        line = p
+                        continue
+                    vtt_file.write((numToTime(startNum)+' --> '+numToTime(endNum)+'\n').encode())
                     vtt_file.write((tmp + '\n\n').encode())
                 line = p
             else:
