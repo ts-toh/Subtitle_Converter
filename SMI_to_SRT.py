@@ -61,10 +61,10 @@ for i in range(len(ls)):
                     srt_file.write((numToTime(startNum)+' --> '+numToTime(endNum)+'\n').encode())
                     tmp = tmp.replace('\n','').replace('<br>','\n')
                     tmp = re.sub(r'.*<P', '<P', tmp)
-					tmp = re.sub(r'\n\n| \n', '\n', tmp)
+                    tmp = re.sub(r'\n\n| \n', '\n', tmp)
                     tmp = re.sub(r'<b>|</b>|&nbsp;', '', tmp)
                     tmp = tmp[:-1]
-					srt_file.write((tmp + '\n\n').encode())
+                    srt_file.write((tmp + '\n\n').encode())
                     count +=1
                 line = p
             else:
