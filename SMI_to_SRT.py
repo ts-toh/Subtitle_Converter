@@ -37,9 +37,12 @@ def convert(path):
     ls = os.listdir(path)
 
     for i in range(len(ls)):
+        if os.path.isdir(path+ls[i]):
+            convert(path+ls[i]+"/")
+
         if re.search('.*smi',ls[i]) != None:
             print(ls[i], end='')
-            smi_file = open(parh + ls[i], 'br')
+            smi_file = open(path + ls[i], 'br')
             srt_file = open(path + ls[i][:-3] + 'srt', 'bw')
             
             data = smi_file.readlines()
@@ -75,9 +78,9 @@ def convert(path):
             srt_file.close()
             print(' ---> '+ls[i][:-3]+'srt')
             
-    print("Complete!")
 
 if len(sys.argv) == 1:
     convert('./')
 else:
     convert(sys.argv[1])
+print("Complete!")

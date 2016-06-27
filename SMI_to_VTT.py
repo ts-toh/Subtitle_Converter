@@ -36,6 +36,9 @@ def convert(path):
     ls = os.listdir(path);
 
     for i in range(len(ls)):
+        if os.path.isdir(path+ls[i]):
+            convert(path+ls[i]+"/")
+
         if re.search('.*smi',ls[i]) != None:
             print(ls[i], end='')
             smi_file = open(path + ls[i], 'br')
@@ -74,9 +77,10 @@ def convert(path):
             vtt_file.close()
             print(' ---> '+ls[i][:-3]+'vtt')
 
-    print("Complete!")
 
 if len(sys.argv) == 1:
     convert('./')
 else:
     convert(sys.argv[1])
+
+print("Complete!")
