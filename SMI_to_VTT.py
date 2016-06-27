@@ -30,8 +30,8 @@ def myDecode(string):
         try:
             return string.decode('utf-8')
         except:
-            print("EUC-KR 또는 UTF-8 인코딩 방식의 파일만 변환이 가능합니다.")
-            exit(0)
+            return string.decode('utf-16','ignore')
+            
 def convert(path):
     ls = os.listdir(path);
 
