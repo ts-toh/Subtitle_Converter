@@ -32,12 +32,11 @@ def myDecode(string):
         except:
             return string.decode('utf-16','ignore')
             
-
-def convert(path):
+def convert(path, option=None):
     ls = os.listdir(path)
 
     for i in range(len(ls)):
-        if os.path.isdir(path+ls[i]):
+        if option == '-r' and os.path.isdir(path+ls[i]):
             convert(path+ls[i]+"/")
 
         if re.search('.*smi',ls[i]) != None:
@@ -49,7 +48,6 @@ def convert(path):
             line = 0
             count = 1
 
-                
             while(line < len(data)):
                 if re.search('sync start=[0-9]+', myDecode(data[line]).lower()):
                     startNum = re.search('[0-9]+', myDecode(data[line])).group(0)
@@ -78,9 +76,14 @@ def convert(path):
             srt_file.close()
             print(' ---> '+ls[i][:-3]+'srt')
             
+if __name__ == '__main__':
+    if len(sys.argv) == 1:
+        convert('./')
+    elif len(sys.argv) == 2:
+        convert(sys.argv[1])
+    elif len(sys.argv) == 3 and sys.argv[2] == '-r':
+        convert(sys.argv[1], sys.argv[2])
+    else:
+        print("Usage: python3 SMI_to_SRT.py [TargetPath] [-r]")
 
-if len(sys.argv) == 1:
-    convert('./')
-else:
-    convert(sys.argv[1])
-print("Complete!")
+    print("Complete!")
