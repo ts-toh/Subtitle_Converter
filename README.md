@@ -6,8 +6,8 @@
 
 **Require python3.x**
 
-python3 SMI_to_SRT.py \[\<TargetPath\>\] \[-r\]
+python3 SMI_to_SRT.py \[TargetDirectory\] \[-r\]
 
--r	:	Convert files from subdirectories
+-r	:	Recursive
 
     eg.) python3 SMI_to_SRT.py ~/Desktop/ -r
